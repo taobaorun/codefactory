@@ -1,0 +1,36 @@
+/**
+* Title: <br>
+* <p>
+	* Description: <br>
+    * </p>
+* <br>
+* @author <a href=mailto:taobaorun@gmail.com>tbrun</a>
+* <br>
+*
+* @since $time
+*/
+package $package;
+
+#foreach($import in $impotList)
+import $import;	
+#end
+public class ${StringUtil.getFirstUpperCase($tableInfo.clzName)} {
+##print property
+#foreach($columnInfo in $tableInfo.getColumnInfoes() )
+	/* $columnInfo.columnComment */
+	private $columnInfo.getSimpleJavaType() ${StringUtil.getFirstLowerCase($columnInfo.columnName)};
+
+#end
+##print get/set method
+#foreach($columnInfo in $tableInfo.getColumnInfoes() )
+	#set($property = ${StringUtil.getFirstLowerCase($columnInfo.columnName)})
+	public void set${StringUtil.getFirstUpperCase($columnInfo.columnName)}($columnInfo.getSimpleJavaType() $property){
+		this.$property =  $property;
+	}
+
+	public $columnInfo.javaType get${StringUtil.getFirstUpperCase($columnInfo.columnName)}(){
+		return $property;
+	}
+
+#end
+}
