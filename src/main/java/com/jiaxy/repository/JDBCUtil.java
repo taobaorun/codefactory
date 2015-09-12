@@ -190,9 +190,9 @@ public class JDBCUtil {
 		}
 		release(null,ps, rs);//释放资源
 		for(String tableName : tableNames ){
-			ps = getMySQLColumnInfoSchema(tableSchema,tableName);//metaData.getColumns(conn.getCatalog(), null, tableName, null);
+			ps = getMySQLColumnInfoSchema(tableSchema, tableName);//metaData.getColumns(conn.getCatalog(), null, tableName, null);
 			rs = ps.executeQuery();
-			String clzName = tableName;//默认为tableName;
+			String clzName = StringUtil.decorateTableName(tableName);//默认为tableName;
 			if( comments != null && StringUtil.isNotEmpty(comments.get(tableName))){
 				clzName = comments.get(tableName);
 				List<String> mList = StringUtil.getMiddleStrByDelimiter(clzName, "#");

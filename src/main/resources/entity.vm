@@ -1,7 +1,13 @@
+package $package;
+
+#foreach($import in $impotList)
+import $import;	
+#end
+
 /**
 * Title: <br>
 * <p>
-	* Description: <br>
+    * Description: <br>
     * </p>
 * <br>
 * @author <a href=mailto:taobaorun@gmail.com>tbrun</a>
@@ -9,11 +15,6 @@
 *
 * @since $time
 */
-package $package;
-
-#foreach($import in $impotList)
-import $import;	
-#end
 public class ${StringUtil.getFirstUpperCase($tableInfo.clzName)} {
 ##print property
 #foreach($columnInfo in $tableInfo.getColumnInfoes() )

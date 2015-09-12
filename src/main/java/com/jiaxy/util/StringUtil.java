@@ -139,16 +139,7 @@ public class StringUtil {
 		return nowdate;
 		
 	}
-/*	生成卡号规则：
-	卡号12位，9801 0000 0018 说明：98（卡BIN号）+010（产品代码）+000001（卡的序号递增）+8为固定数字（暂定）。
-	生成代金卷（根据卡产品定义时，定义代金卷金额和数量生成代金卷）*/
-	public static String cardID (String CardProductID,int num){
-		DecimalFormat g=new DecimalFormat("000000");
-		String cid="98"+CardProductID+g.format(num)+"8";
-		return cid;
-		
-	}
-	
+
 	/**
 	 * 按指定字符集返回字符串
 	 * 
@@ -204,12 +195,36 @@ public class StringUtil {
 			if( str.length() <=2 ){
 				return str.toLowerCase();
 			}else{
-				getFirstLowerCase(str);
+				return getHumpString(str.split("_"));
 			}
 		}
 		return str;
 	}
-	
+
+	private static String getHumpString(String[] strs){
+		if ( strs == null || strs.length == 0){
+			return "";
+		}
+		StringBuilder sb = new StringBuilder();
+		for ( int i = 0 ;i < strs.length ;i++ ){
+			if ( i== 0 ){
+				sb.append(getFirstLowerCase(strs[i]));
+			} else {
+				sb.append(getFirstUpperCase(strs[i]));
+			}
+		}
+		return sb.toString();
+	}
+
+	public static String decorateTableName(String tableName){
+		String[] arr = tableName.split("_");
+		StringBuilder sb = new StringBuilder();
+		for ( String str : arr ){
+			sb.append(getFirstUpperCase(str));
+		}
+		return sb.toString();
+	}
+
 	/**
 	 * 将包路径转化成路径
 	 * @param packagestr

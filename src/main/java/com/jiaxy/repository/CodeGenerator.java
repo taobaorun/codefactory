@@ -87,7 +87,7 @@ public class CodeGenerator {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException, SQLException {
-		generateCode("police_info");
+		generateCode("suspect_out_info");
 	}
 
 }
