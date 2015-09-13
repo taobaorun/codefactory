@@ -19,17 +19,17 @@ public class ${StringUtil.getFirstUpperCase($tableInfo.clzName)} {
 ##print property
 #foreach($columnInfo in $tableInfo.getColumnInfoes() )
 	/* $columnInfo.columnComment */
-	private $columnInfo.getSimpleJavaType() ${StringUtil.getFirstLowerCase($columnInfo.columnName)};
+	private $columnInfo.getSimpleJavaType() ${StringUtil.getFirstLowerCase($columnInfo.field)};
 
 #end
 ##print get/set method
 #foreach($columnInfo in $tableInfo.getColumnInfoes() )
-	#set($property = ${StringUtil.getFirstLowerCase($columnInfo.columnName)})
-	public void set${StringUtil.getFirstUpperCase($columnInfo.columnName)}($columnInfo.getSimpleJavaType() $property){
+	#set($property = ${StringUtil.getFirstLowerCase($columnInfo.field)})
+	public void set${StringUtil.getFirstUpperCase($columnInfo.field)}($columnInfo.getSimpleJavaType() $property){
 		this.$property =  $property;
 	}
 
-	public $columnInfo.javaType get${StringUtil.getFirstUpperCase($columnInfo.columnName)}(){
+	public $columnInfo.javaType get${StringUtil.getFirstUpperCase($columnInfo.field)}(){
 		return $property;
 	}
 

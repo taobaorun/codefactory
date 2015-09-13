@@ -1,0 +1,19 @@
+package $daopackage;
+
+import net.zazn.sc.dao.common.BaseDAO;
+import $package.${StringUtil.getFirstUpperCase($tableInfo.clzName)};
+import org.springframework.stereotype.Repository;
+
+/**
+* Title: <br>
+* <p>
+    * Description: <br>
+    * </p>
+* <br>
+* @author <a href=mailto:taobaorun@gmail.com>tbrun</a>
+* <br>
+*
+* @since $time
+*/
+public interface ${StringUtil.getFirstUpperCase($tableInfo.clzName)}DAO extends BaseDAO<${StringUtil.getFirstUpperCase($tableInfo.clzName)}> {
+}

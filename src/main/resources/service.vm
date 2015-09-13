@@ -1,0 +1,17 @@
+package $servicepackage;
+
+import net.zazn.sc.service.common.BaseService;
+import $package.${StringUtil.getFirstUpperCase($tableInfo.clzName)};
+/**
+* Title: <br>
+* <p>
+    * Description: <br>
+    * </p>
+* <br>
+* @author <a href=mailto:taobaorun@gmail.com>tbrun</a>
+* <br>
+*
+* @since $time
+*/
+public interface ${StringUtil.getFirstUpperCase($tableInfo.clzName)}Service extends BaseService<${StringUtil.getFirstUpperCase($tableInfo.clzName)}> {
+}

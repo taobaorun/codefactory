@@ -43,9 +43,14 @@ public class CodeGenerator {
 		init();
 		VelocityUtil.VelocityProxy vp = VelocityUtil.getDefaultInitVelocity();
 		String savePath = p.getProperty("prjabsolutepath")+File.separator+StringUtil.covertPackageTOPath(p.getProperty("package"));
+		String daopath = p.getProperty("daopath")+File.separator;
+		String servicePath = p.getProperty("servicepath")+File.separator;
+		String serviceTestPath = p.getProperty("servicetestpath")+File.separator;
 		VelocityContext context = new VelocityContext();
 		context.put("StringUtil", StringUtil.class);
 		context.put("package", p.getProperty("package"));
+		context.put("daopackage", p.getProperty("daopackage"));
+		context.put("servicepackage", p.getProperty("servicepackage"));
 		context.put("time", DateTimeUtil.getFormatedDate(new Date(), "yyyy-MM-dd HH:mm:ss"));
 		context.put("year", Integer.valueOf(DateTimeUtil.getYear(new Date())));
 		List<TableInfo> tables = JDBCUtil.getTableInfoes(includeTableNames);
@@ -59,6 +64,38 @@ public class CodeGenerator {
 				File srcfile = new File(savePath+File.separator+StringUtil.getFirstUpperCase(tableInfo.getClzName())+".java");
 				FileUtils.write(srcfile, javaClz);
 			}
+			StringWriter daoxml = new StringWriter();
+			if(vp.mergeTemplate("mybatisDAO.vm","UTF-8",contextEntity,daoxml)){
+				String daoXML = daoxml.toString();
+				File daoXMLFile = new File(daopath+"resources"+File.separator+"mapper"+File.separator+StringUtil.getFirstUpperCase(tableInfo.getClzName())+"DAO.xml");
+				FileUtils.write(daoXMLFile, daoXML);
+
+			}
+            StringWriter dao = new StringWriter();
+			if(vp.mergeTemplate("dao.vm","UTF-8",contextEntity,dao)){
+				String daoStr = dao.toString();
+				File daoFile = new File(daopath+"java"+File.separator+StringUtil.covertPackageTOPath(p.getProperty("daopackage"))+ File.separator + StringUtil.getFirstUpperCase(tableInfo.getClzName()) + "DAO.java");
+				FileUtils.write(daoFile, daoStr);
+
+			}
+            StringWriter serviceSW = new StringWriter();
+            if(vp.mergeTemplate("service.vm", "UTF-8", contextEntity, serviceSW)){
+                String serviceStr = serviceSW.toString();
+                File servicefile = new File(servicePath+File.separator+StringUtil.covertPackageTOPath(p.getProperty("servicepackage"))+File.separator+StringUtil.getFirstUpperCase(tableInfo.getClzName())+"Service.java");
+                FileUtils.write(servicefile, serviceStr);
+            }
+            StringWriter serviceImplSW = new StringWriter();
+            if(vp.mergeTemplate("serviceImpl.vm", "UTF-8", contextEntity, serviceImplSW)){
+                String serviceStr = serviceImplSW.toString();
+                File servicefile = new File(servicePath+File.separator+StringUtil.covertPackageTOPath(p.getProperty("servicepackage"))+File.separator+"impl"+File.separator+StringUtil.getFirstUpperCase(tableInfo.getClzName())+"ServiceImpl.java");
+                FileUtils.write(servicefile, serviceStr);
+            }
+            StringWriter serviceImplTestSW = new StringWriter();
+            if(vp.mergeTemplate("serviceTest.vm", "UTF-8", contextEntity, serviceImplTestSW)){
+                String serviceStr = serviceImplTestSW.toString();
+                File servicefile = new File(serviceTestPath+File.separator+StringUtil.covertPackageTOPath(p.getProperty("servicepackage"))+File.separator+"impl"+File.separator+StringUtil.getFirstUpperCase(tableInfo.getClzName())+"ServiceImplTest.java");
+                FileUtils.write(servicefile, serviceStr);
+            }
 		}
 		System.out.println("----code over ----");
 		
@@ -87,7 +124,7 @@ public class CodeGenerator {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException, SQLException {
-		generateCode("suspect_out_info");
+		generateCode("suspect_safe_check");
 	}
 
 }

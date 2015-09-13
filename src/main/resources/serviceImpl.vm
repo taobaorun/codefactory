@@ -1,0 +1,44 @@
+package ${servicepackage}.impl;
+
+import $package.${StringUtil.getFirstUpperCase($tableInfo.clzName)};
+import $servicepackage.${StringUtil.getFirstUpperCase($tableInfo.clzName)}Service;
+import $daopackage.${StringUtil.getFirstUpperCase($tableInfo.clzName)}DAO;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+/**
+* Title: <br>
+* <p>
+    * Description: <br>
+    * </p>
+* <br>
+* @author <a href=mailto:taobaorun@gmail.com>tbrun</a>
+* <br>
+*
+* @since $time
+*/
+@Service
+public class ${StringUtil.getFirstUpperCase($tableInfo.clzName)}ServiceImpl implements ${StringUtil.getFirstUpperCase($tableInfo.clzName)}Service {
+    @Resource
+    private ${StringUtil.getFirstUpperCase($tableInfo.clzName)}DAO ${StringUtil.getFirstLowerCase($tableInfo.clzName)}DAO;
+
+    @Override
+    public void save(${StringUtil.getFirstUpperCase($tableInfo.clzName)} entity) {
+        ${StringUtil.getFirstLowerCase($tableInfo.clzName)}DAO.insert(entity);
+    }
+
+    @Override
+    public ${StringUtil.getFirstUpperCase($tableInfo.clzName)} load(int id) {
+        return ${StringUtil.getFirstLowerCase($tableInfo.clzName)}DAO.queryById(id);
+    }
+
+    @Override
+    public void update(${StringUtil.getFirstUpperCase($tableInfo.clzName)} entity) {
+        ${StringUtil.getFirstLowerCase($tableInfo.clzName)}DAO.update(entity);
+    }
+
+    @Override
+    public void remove(int id) {
+        ${StringUtil.getFirstLowerCase($tableInfo.clzName)}DAO.delete(id);
+    }
+}

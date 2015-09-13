@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="$daopackage.${StringUtil.getFirstUpperCase($tableInfo.clzName)}DAO">
+    <resultMap id="BaseResultMap" type="$package.${StringUtil.getFirstUpperCase($tableInfo.clzName)}">
+        #foreach($columnInfo in $tableInfo.getColumnInfoes() )
+            <id column="$columnInfo.getDbColumn()" property="${StringUtil.getFirstLowerCase($columnInfo.field)}" jdbcType="$columnInfo.getColumnType()"/>
+        #end
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        #set($i=0)
+        #foreach($columnInfo in $tableInfo.getColumnInfoes() )
+        #if($i != $tableInfo.getColumnInfoes().size() - 1 )`$columnInfo.getDbColumn()`,
+        #else`$columnInfo.getDbColumn()`
+        #end
+        #set($i=$i+1)
+        #end
+    </sql>
+
+    <select id="queryAll" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from $tableInfo.tableName c
+        <where>
+            <if test="params.name != null and params.name != ''">
+                and name like concat('%', trim('${params.name}'),'%' )
+            </if>
+        </where>
+        limit #{offset}, #{size}
+    </select>
+
+    <select id="countAll" resultType="int">
+        select count(1) from $tableInfo.tableName
+        <where>
+            <if test="params.name != null and params.name != ''">
+                and name like concat('%', trim('${params.name}'),'%' )
+            </if>
+        </where>
+    </select>
+
+    <insert id="insert" parameterType="$package.${StringUtil.getFirstUpperCase($tableInfo.clzName)}"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO $tableInfo.tableName (
+        #set($i=0)
+        #foreach($columnInfo in $tableInfo.getColumnInfoes() )
+        #if($columnInfo.getDbColumn() != "id")
+        #if($i != $tableInfo.getColumnInfoes().size() - 1 )`$columnInfo.getDbColumn()`,
+        #else`$columnInfo.getDbColumn()`
+        #end
+        #end
+        #set($i=$i+1)
+        #end
+        )
+        VALUES(
+        #set($i=0)
+        #foreach($columnInfo in $tableInfo.getColumnInfoes() )
+        #if($columnInfo.getDbColumn() != "id")
+        #if($i != $tableInfo.getColumnInfoes().size() - 1 )#{$columnInfo.field},
+        #else#{$columnInfo.field}
+        #end
+        #end
+        #set($i=$i+1)
+        #end
+        )
+    </insert>
+
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from $tableInfo.tableName where id = #{id}
+    </select>
+
+    <select id="queryByIds" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from $tableInfo.tableName
+        where id in
+        <foreach item="item" index="index" collection="ids" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <update id="update" >
+        update $tableInfo.tableName
+        <set>
+            #set($i=0)
+            #foreach($columnInfo in $tableInfo.getColumnInfoes() )
+            #if($columnInfo.getDbColumn() != "id")
+            #if($i != $tableInfo.getColumnInfoes().size() - 1 )`$columnInfo.dbColumn`=#{$columnInfo.field},
+            #else`$columnInfo.dbColumn`=#{$columnInfo.field}
+            #end
+            #end
+            #set($i=$i+1)
+            #end
+        </set>
+        where
+        id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete from $tableInfo.tableName where id=#{id}
+    </delete>
+</mapper>

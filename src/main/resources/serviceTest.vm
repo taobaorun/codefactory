@@ -1,0 +1,61 @@
+package ${servicepackage}.impl;
+
+import $package.${StringUtil.getFirstUpperCase($tableInfo.clzName)};
+import $servicepackage.${StringUtil.getFirstUpperCase($tableInfo.clzName)}Service;
+import org.junit.Before;
+import org.junit.Test;
+
+import javax.annotation.Resource;
+import static org.junit.Assert.*;
+
+
+/**
+* Title: <br>
+* <p>
+    * Description: <br>
+    * </p>
+* <br>
+* @author <a href=mailto:taobaorun@gmail.com>tbrun</a>
+* <br>
+*
+* @since $time
+*/
+public class ${StringUtil.getFirstUpperCase($tableInfo.clzName)}ServiceImplTest extends BaseTest {
+
+
+    @Resource
+    private  ${StringUtil.getFirstUpperCase($tableInfo.clzName)}Service  ${StringUtil.getFirstLowerCase($tableInfo.clzName)}Service;
+
+    private ${StringUtil.getFirstUpperCase($tableInfo.clzName)} ${StringUtil.getFirstLowerCase($tableInfo.clzName)};
+
+    @Before
+    public void setUp() throws Exception {
+        ${StringUtil.getFirstLowerCase($tableInfo.clzName)} = new ${StringUtil.getFirstUpperCase($tableInfo.clzName)}();
+    }
+
+    @Test
+    public void testSave() throws Exception {
+        ${StringUtil.getFirstLowerCase($tableInfo.clzName)}Service.save(${StringUtil.getFirstLowerCase($tableInfo.clzName)});
+        ${StringUtil.getFirstLowerCase($tableInfo.clzName)}Service.save(${StringUtil.getFirstLowerCase($tableInfo.clzName)});
+    }
+
+    @Test
+    public void testLoad() throws Exception {
+        ${StringUtil.getFirstUpperCase($tableInfo.clzName)} ${StringUtil.getFirstLowerCase($tableInfo.clzName)} = ${StringUtil.getFirstLowerCase($tableInfo.clzName)}Service.load(1);
+        assertNotNull(${StringUtil.getFirstLowerCase($tableInfo.clzName)});
+    }
+
+    @Test
+    public void testUpdate() throws Exception {
+        ${StringUtil.getFirstLowerCase($tableInfo.clzName)}.setId(1);
+        ${StringUtil.getFirstLowerCase($tableInfo.clzName)}Service.update(${StringUtil.getFirstLowerCase($tableInfo.clzName)});
+        ${StringUtil.getFirstUpperCase($tableInfo.clzName)} ${StringUtil.getFirstLowerCase($tableInfo.clzName)} = ${StringUtil.getFirstLowerCase($tableInfo.clzName)}Service.load(1);
+    }
+
+    @Test
+    public void testRemove() throws Exception {
+        ${StringUtil.getFirstLowerCase($tableInfo.clzName)}Service.remove(2);
+        ${StringUtil.getFirstUpperCase($tableInfo.clzName)} ${StringUtil.getFirstLowerCase($tableInfo.clzName)} = ${StringUtil.getFirstLowerCase($tableInfo.clzName)}Service.load(2);
+        assertNull(${StringUtil.getFirstLowerCase($tableInfo.clzName)});
+    }
+}

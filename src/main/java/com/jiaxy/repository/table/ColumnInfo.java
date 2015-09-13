@@ -14,8 +14,11 @@ import com.jiaxy.util.StringUtil;
  * 
  */
 public class ColumnInfo {
-	/* 字段名 */
-	private String columnName;
+	/* 字段名对应entity中的属性 */
+	private String field;
+
+	private String dbColumn;
+
 	/* 字段类型  */
 	private String columnType;
 	/* 对应java属性类型  */
@@ -31,24 +34,31 @@ public class ColumnInfo {
 	
 	public ColumnInfo(String columnName, String columnType, String javaType,
 			String columnComment) {
-		this.columnName = columnName;
+		this.field = columnName;
 		this.columnType = columnType;
 		this.javaType = javaType;
 		this.columnComment = columnComment;
 	}
 
+	public ColumnInfo( String dbColumn,String field, String columnType, String javaType, String columnComment) {
+		this.field = field;
+		this.dbColumn = dbColumn;
+		this.columnType = columnType;
+		this.javaType = javaType;
+		this.columnComment = columnComment;
+	}
 
 	/**
-	 * @return the columnName
+	 * @return the field
 	 */
-	public String getColumnName() {
-		return columnName;
+	public String getField() {
+		return field;
 	}
 	/**
-	 * @param columnName the columnName to set
+	 * @param field the field to set
 	 */
-	public void setColumnName(String columnName) {
-		this.columnName = columnName;
+	public void setField(String field) {
+		this.field = field;
 	}
 	/**
 	 * @return the columnType
@@ -90,7 +100,15 @@ public class ColumnInfo {
 	public void setJavaType(String javaType) {
 		this.javaType = javaType;
 	}
-	
+
+	public String getDbColumn() {
+		return dbColumn;
+	}
+
+	public void setDbColumn(String dbColumn) {
+		this.dbColumn = dbColumn;
+	}
+
 	/**
 	 * 返回java类型简单属性类型
 	 * 

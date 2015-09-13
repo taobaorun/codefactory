@@ -200,12 +200,12 @@ public class JDBCUtil {
 			}
 			tableInfo = new TableInfo(tableName,clzName);
 			while( rs.next() ){
-				String columnName = rs.getString("COLUMN_NAME");
-				columnName = StringUtil.getHumpString(columnName);
+				String dbColumn = rs.getString("COLUMN_NAME");
+				String columnName = StringUtil.getHumpString(dbColumn);
 				String columnComment = rs.getString("COLUMN_COMMENT");
 				String columnType = rs.getString("DATA_TYPE").toUpperCase();
 				String javaType = MySQLColumnType.getMySQLColumnType(columnType).getJavaType();
-				tableInfo.getColumnInfoes().add(new ColumnInfo(columnName,columnType,javaType,columnComment));
+				tableInfo.getColumnInfoes().add(new ColumnInfo(dbColumn,columnName,columnType,javaType,columnComment));
 			}
 			list.add(tableInfo);
 			JDBCUtil.release(ps,rs);
@@ -324,7 +324,7 @@ public class JDBCUtil {
 //			System.out.println(" 表名 "+info.getTableName());
 //			for(ColumnInfo column :info.getColumnInfoes()){
 //				System.out.println("      列   ");
-//				System.out.println("      列名   "+column.getColumnName());
+//				System.out.println("      列名   "+column.getField());
 //				System.out.println("      列类型   "+column.getColumnType());
 //				System.out.println("      java类型   "+column.getJavaType());
 //				System.out.println("      simple java类型   "+column.getSimpleJavaType());
