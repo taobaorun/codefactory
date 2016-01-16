@@ -120,11 +120,11 @@ public class CodeGenerator {
 
 	/**
 	 * @param args
-	 * @throws SQLException 
-	 * @throws IOException 
+	 * @throws SQLException
+	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException, SQLException {
-		generateCode("suspect_safe_check");
+		generateCode("dianming");
 	}
 
 }

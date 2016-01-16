@@ -31,6 +31,7 @@ public enum MySQLColumnType {
 		SET	可以从定义数值的集合上接受0个或者多个值的数据类型
 	 */
 	 INT("INT","Integer"),
+	 TINYINT("TINYINT","Integer"),
 	 BIGINT("BIGINT","Integer"),
 	 DECIMAL("DECIMAL","Double"),
 	 DOUBLE("DOUBLE","Double"),
