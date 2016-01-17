@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 *
 * @since $time
 */
-@Service("${StringUtil.getFirstLowerCase($tableInfo.clzName)}ServerImpl")
+@Service("${StringUtil.getFirstLowerCase($tableInfo.clzName)}ServiceImpl")
 public class ${StringUtil.getFirstUpperCase($tableInfo.clzName)}ServiceImpl implements ${StringUtil.getFirstUpperCase($tableInfo.clzName)}Service {
     @Resource
     private ${StringUtil.getFirstUpperCase($tableInfo.clzName)}DAO ${StringUtil.getFirstLowerCase($tableInfo.clzName)}DAO;
