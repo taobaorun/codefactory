@@ -85,9 +85,11 @@
             #set($i=0)
             #foreach($columnInfo in $tableInfo.getColumnInfoes() )
             #if($columnInfo.getDbColumn() != "id")
-            #if($i != $tableInfo.getColumnInfoes().size() - 1 )`$columnInfo.dbColumn`=#{$columnInfo.field},
-            #else`$columnInfo.dbColumn`=#{$columnInfo.field}
-            #end
+                #if($i != $tableInfo.getColumnInfoes().size() - 1 )
+                    <if test="$columnInfo.field != null and $columnInfo.field != ''">`$columnInfo.dbColumn`=#{$columnInfo.field},</if>
+                #else
+                    <if test="$columnInfo.field != null and $columnInfo.field != ''">`$columnInfo.dbColumn`=#{$columnInfo.field}</if>
+                #end
             #end
             #set($i=$i+1)
             #end
