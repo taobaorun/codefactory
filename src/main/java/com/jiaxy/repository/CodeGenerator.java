@@ -124,7 +124,7 @@ public class CodeGenerator {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException, SQLException {
-		generateCode("dian_ming");
+		generateCode("see_doctor_type");
 	}
 
 }
