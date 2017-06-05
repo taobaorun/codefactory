@@ -205,6 +205,9 @@ public class JDBCUtil {
 				String columnComment = rs.getString("COLUMN_COMMENT");
 				String columnType = rs.getString("DATA_TYPE").toUpperCase();
 				String javaType = MySQLColumnType.getMySQLColumnType(columnType).getJavaType();
+				if ("int".equalsIgnoreCase(columnType)){
+					columnType = "INTEGER";
+				}
 				tableInfo.getColumnInfoes().add(new ColumnInfo(dbColumn,columnName,columnType,javaType,columnComment));
 			}
 			list.add(tableInfo);

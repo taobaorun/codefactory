@@ -10,8 +10,6 @@ import org.springframework.stereotype.Repository;
     * Description: <br>
     * </p>
 * <br>
-* @author <a href=mailto:taobaorun@gmail.com>taobaorun</a>
-* <br>
 *
 * @since $time
 */

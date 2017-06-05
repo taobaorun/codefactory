@@ -6,6 +6,14 @@
  */
 package com.jiaxy.repository;
 
+import com.jiaxy.repository.table.ColumnInfo;
+import com.jiaxy.repository.table.TableInfo;
+import com.jiaxy.util.DateTimeUtil;
+import com.jiaxy.util.StringUtil;
+import com.jiaxy.util.VelocityUtil;
+import org.apache.commons.io.FileUtils;
+import org.apache.velocity.VelocityContext;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
@@ -14,14 +22,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-
-import com.jiaxy.repository.table.ColumnInfo;
-import com.jiaxy.repository.table.TableInfo;
-import com.jiaxy.util.DateTimeUtil;
-import com.jiaxy.util.StringUtil;
-import com.jiaxy.util.VelocityUtil;
-import org.apache.commons.io.FileUtils;
-import org.apache.velocity.VelocityContext;
 
 /**
  * 功能概述:<br/>
@@ -124,7 +124,7 @@ public class CodeGenerator {
 	 * @throws IOException
 	 */
 	public static void main(String[] args) throws IOException, SQLException {
-		generateCode("see_doctor_type");
+		generateCode("hms_senddrug_drug");
 	}
 
 }
